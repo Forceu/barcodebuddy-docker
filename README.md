@@ -14,7 +14,7 @@ Follow [these instructions](https://docs.docker.com/engine/installation/) to get
 ### To pull the latest images to your machine:
 
 ```
-docker pull f0rc3/barcodebuddy-docker
+docker pull f0rc3/barcodebuddy-docker:v1
 ```
 
 BarcodeBuddy should be accessible via `http(s)://localhost/`. The https option will work. However, since the certificate is self-signed, most browsers will complain.
