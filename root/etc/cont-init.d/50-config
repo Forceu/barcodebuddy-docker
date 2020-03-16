@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+
+# create symlinks
+i=/app/bbuddy/data
+[[ -e "$i" && ! -L "$i" && -e /config/"$(basename "$i")" ]] && \
+        rm -Rf "$i" && \
+        ln -s /config/"$(basename "$i")" "$i"
+[[ -e "$i" && ! -L "$i" ]] && \
+	mv "$i" /config/"$(basename "$i")" && \
+	ln -s /config/"$(basename "$i")" "$i"
+
+chown -R abc:abc \
+    /app/bbuddy \
+    /config
+
+
+sudo -u websocket /usr/bin/nohup /usr/bin/php /app/bbuddy/wsserver.php &
