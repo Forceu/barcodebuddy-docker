@@ -28,7 +28,12 @@ docker build --no-cache --pull -t forceu/barcodebuddy-docker .
 
 ## Additional Information
 
-The docker images build are based on [Alpine](https://hub.docker.com/_/alpine/), with an extremelly low footprint (about 70MB in total).
+Although the Websocket server will be started automatically, you still need to set it up - if you are accessing BarcodeBuddy with HTTPS, the websocket connection needs to be secured as well (wss:// instead of ws://), otherwise most browsers reject the connection.
+
+We recommend nginx for this, use the example file and adjust the config. In the BBuddy webinterface, go to Settings and tick "Use SSL proxy" (even if you are not using one). If you are serving the site through a HTTP connection, enter "ws://IP_OF_SERVER:47631/screen" (make sure to forward the port if needed). If you are using nginx as a ssl reverse proxy, enter "wss://NGINX_URL/screen" instead.
+
+
+The docker images build are based on [Alpine](https://hub.docker.com/_/alpine/), with an extremely low footprint (about 70MB in total).
 
 ## License
 The MIT License (MIT)
