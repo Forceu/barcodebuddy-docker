@@ -1,5 +1,7 @@
 FROM lsiobase/nginx:3.11
 
+#Build example: docker build --no-cache --pull -t forceu/barcodebuddy-docker .
+
 # set version label
 ARG BUILD_DATE
 ARG VERSION
@@ -18,17 +20,16 @@ RUN \
 	curl \
 	php7-curl \
 	php7-sqlite3
-#https://github.com/Forceu/barcodebuddy/archive/${BBUDDY_RELEASE}.tar.gz
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy && \
  if [ -z ${BBUDDY_RELEASE+x} ]; then \
 	BBUDDY_RELEASE=$(curl -sX GET "https://api.github.com/repos/Forceu/barcodebuddy/releases/latest" \
-	| awk '/tag_name/{print $4}' FS='[""]'); \
+	| awk '/tag_name/{print $4; exit}' FS='[""]'); \
  fi && \
  curl -o \
 	/tmp/bbuddy.tar.gz -L \
-	"https://bulling.mobi/barcodebuddy-preview.tar.gz" && \
+	"https://github.com/Forceu/barcodebuddy/archive/${BBUDDY_RELEASE}.tar.gz" && \
  tar xf \
 	/tmp/bbuddy.tar.gz -C \
 	/app/bbuddy/ --strip-components=1 && \
@@ -49,6 +50,5 @@ RUN groupadd -r websocket && useradd -r -g websocket websocket
 COPY root/ /
 
 # ports and volumes
-EXPOSE 6783
-EXPOSE 6784
+EXPOSE 80 443 47631
 VOLUME /config
