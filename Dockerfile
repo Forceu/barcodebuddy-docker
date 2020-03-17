@@ -15,11 +15,10 @@ RUN \
  echo "**** Installing runtime packages ****" && \
  apk add --no-cache \
 	curl \
-	sudo \
 	php7 \
-	curl \
 	php7-curl \
-	php7-sqlite3
+	php7-sqlite3 \
+	sudo
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy && \
