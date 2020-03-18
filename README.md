@@ -35,7 +35,7 @@ Although the Websocket server will be started automatically, you still need to s
 
 We recommend nginx for this, use the example file and adjust the config. In the BBuddy webinterface, go to Settings and tick "Use SSL proxy" (even if you are not using one). If you are serving the site through a HTTP connection, enter `ws://IP_OF_SERVER:47631/screen` (make sure to forward the port if needed). If you are using nginx as a ssl reverse proxy, enter `wss://NGINX_URL/screen` instead.
 
-### Exposed hosts
+### Exposed Ports
 
  - 80:    HTTP
  - 443:   HTTPS
