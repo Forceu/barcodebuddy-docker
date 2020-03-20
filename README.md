@@ -14,8 +14,8 @@ Follow [these instructions](https://docs.docker.com/engine/installation/) to get
 ### To pull the latest images to your machine:
 
 ```
-docker pull f0rc3/barcodebuddy-docker:v1
-docker run -d -v bbconfig:/config -p 80:80 -p 443:443 -p 47631:47631 f0rc3/barcodebuddy-docker:v1
+docker pull f0rc3/barcodebuddy-docker:latest
+docker run -d -v bbconfig:/config -p 80:80 -p 443:443 f0rc3/barcodebuddy-docker:latest
 ```
 
 BarcodeBuddy should be accessible via `http(s)://DOCKER_HOST_IP/`. The https option will work. However, since the certificate is self-signed, most browsers will complain.
@@ -25,7 +25,7 @@ The volume "bbconfig" is used, in order to store the database between instances/
 If you are already running a webserver on the docker hosts, you need to set ports 80 and 443 to different values in the run command, eg:
 
 ```
-docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 -p 47631:47631 f0rc3/barcodebuddy-docker:v1
+docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 f0rc3/barcodebuddy-docker:latest
 ```
 
 
@@ -39,15 +39,12 @@ docker build --no-cache --pull -t forceu/barcodebuddy-docker .
 
 ### Websockets
 
-Although the Websocket server will be started automatically, you still need to set it up - if you are accessing BarcodeBuddy with HTTPS, the websocket connection needs to be secured as well (wss:// instead of ws://), otherwise most browsers reject the connection.
-
-We recommend nginx for this, use the example file and adjust the config. In the BBuddy webinterface, go to Settings and tick "Use SSL proxy" (even if you are not using one). If you are serving the site through a HTTP connection, enter `ws://IP_OF_SERVER:47631/screen` (make sure to forward the port if needed). If you are using nginx as a ssl reverse proxy, enter `wss://NGINX_URL/screen` instead.
+In the current version, the websockets are only used for internal communication. Everything will work out of the box.
 
 ### Exposed Ports
 
  - 80:    HTTP
  - 443:   HTTPS
- - 47631: Websockets
 
 ### Misc
 
