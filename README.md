@@ -28,6 +28,14 @@ If you are already running a webserver on the docker hosts, you need to set port
 docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 f0rc3/barcodebuddy-docker:latest
 ```
 
+The architectures supported by this image are:
+
+| Architecture | Tag |
+| :----: | --- |
+| x86-64 | latest |
+| arm64 | arm64v8-latest |
+| armhf | arm32v7-latest |
+
 #### Developer image
 
 If you would like to use the unstable channel, which includes all commits and might be more up to date than the release, use the following command:
