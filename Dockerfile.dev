@@ -1,12 +1,10 @@
 FROM lsiobase/nginx:3.11
 
-#Build example: docker build --no-cache --pull -t forceu/barcodebuddy-docker .
+#Build example: docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t forceu/barcodebuddy-docker -f Dockerfile.dev .
 
 # set version label
 ARG BUILD_DATE
-ARG VERSION
-ARG BBUDDY_RELEASE
-LABEL build_version="BarcodeBuddy Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL build_version="BarcodeBuddy DevBuild Build-date: ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
 

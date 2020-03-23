@@ -1,6 +1,6 @@
-FROM lsiobase/nginx:3.11
+FROM lsiobase/nginx:arm32v7-3.11
 
-#Build example: docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="v1.4.0.0" -t forceu/barcodebuddy-docker .
+#Build example: docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="v1.4.0.0" -t forceu/barcodebuddy-docker -f Dockerfile.armhf .
 
 # set version label
 ARG BUILD_DATE
@@ -10,6 +10,8 @@ LABEL build_version="BarcodeBuddy ${VERSION} Build ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
 
+#Remove the line below, if not compiling on an x64/x86 machine
+COPY qemu-arm-static /usr/bin/qemu-arm-static
 
 RUN \
  echo "**** Installing runtime packages ****" && \
@@ -43,7 +45,8 @@ RUN \
  echo "**** Cleanup ****" && \
  rm -rf \
 	/root/.cache \
-	/tmp/*
+	/tmp/* \
+	/usr/bin/qemu-arm-static
 
 # copy local files
 COPY root/ /
