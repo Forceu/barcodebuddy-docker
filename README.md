@@ -27,6 +27,7 @@ If you are already running a webserver on the docker hosts, you need to set port
 ```
 docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 f0rc3/barcodebuddy-docker:latest
 ```
+#### Architectures
 
 The architectures supported by this image are:
 
