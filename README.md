@@ -28,11 +28,23 @@ If you are already running a webserver on the docker hosts, you need to set port
 docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 f0rc3/barcodebuddy-docker:latest
 ```
 
+#### Developer image
+
+If you would like to use the unstable channel, which includes all commits and might be more up to date than the release, use the following command:
+
+```
+docker pull f0rc3/barcodebuddy-docker:latest-dev
+```
 
 ### To build from scratch
 
+#### Latest release
 ```
 docker build --no-cache --pull -t forceu/barcodebuddy-docker .
+```
+#### Latest commit (unstable)
+```
+docker build --no-cache --pull -t forceu/barcodebuddy-docker-dev -f Dockerfile.dev .
 ```
 
 ## Additional Information
