@@ -13,6 +13,3 @@ i=/app/bbuddy/data
 chown -R abc:abc \
     /app/bbuddy \
     /config
-
-
-sudo -u websocket /usr/bin/nohup /usr/bin/php /app/bbuddy/wsserver.php &
