@@ -41,7 +41,7 @@ sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/
 sed -i 's/WWW_USER=.*/WWW_USER="abc"/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/docker/parseEnv.sh && \
-sed -i 's/pm.max_children = 5/pm.max_children = 200/g' /etc/php7/php-fpm.d/www.conf
+sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php7/php-fpm.d/www.conf
 #Bug in sudo requires disable_coredump
 #Max children need to be a higher value, otherwise websockets / SSE might not work properly
 
