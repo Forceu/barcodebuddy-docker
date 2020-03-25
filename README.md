@@ -18,15 +18,10 @@ docker pull f0rc3/barcodebuddy-docker:latest
 docker run -d -v bbconfig:/config -p 80:80 -p 443:443 f0rc3/barcodebuddy-docker:latest
 ```
 
-BarcodeBuddy should be accessible via `http(s)://DOCKER_HOST_IP/`. The https option will work. However, since the certificate is self-signed, most browsers will complain.
+#### Documentation
 
-The volume "bbconfig" is used, in order to store the database between instances/images.
+Please have a look at the [documentation](https://barcodebuddy-documentation.readthedocs.io/en/latest/), for more information on how to install and use the docker image.
 
-If you are already running a webserver on the docker hosts, you need to set ports 80 and 443 to different values in the run command, eg:
-
-```
-docker run -d -v bbconfig:/config -p 8080:80 -p 9443:443 f0rc3/barcodebuddy-docker:latest
-```
 #### Architectures
 
 The architectures supported by this image are:
