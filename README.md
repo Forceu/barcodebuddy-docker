@@ -40,6 +40,16 @@ If you would like to use the unstable channel, which includes all commits and mi
 docker pull f0rc3/barcodebuddy-docker:latest-dev
 ```
 
+
+
+The architectures supported by this image are:
+
+| Architecture | Tag |
+| :----: | --- |
+| x86-64 | latest-dev |
+| arm64 | arm64v8-latest-dev |
+| armhf | arm32v7-latest-dev |
+
 ### To build from scratch
 
 #### Latest release
