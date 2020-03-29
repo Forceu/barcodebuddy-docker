@@ -24,9 +24,9 @@ case $CHOICE in
             echo "Building dev images"
 	    cp /usr/bin/qemu-arm-static .
 	    cp /usr/bin/qemu-aarch64-static .
-	    docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
-	    docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm64v8-latest-dev -f Dockerfile.dev.aarch64 .
-	    docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm32v7-latest-dev -f Dockerfile.dev.armhf .
+	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
+	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm64v8-latest-dev -f Dockerfile.dev.aarch64 .
+	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm32v7-latest-dev -f Dockerfile.dev.armhf .
             echo "Pushing dev images"
 	    docker push f0rc3/barcodebuddy-docker:latest-dev
 	    docker push f0rc3/barcodebuddy-docker:arm64v8-latest-dev
@@ -40,7 +40,7 @@ case $CHOICE in
 	    read version
 	    cp /usr/bin/qemu-arm-static .
 	    cp /usr/bin/qemu-aarch64-static .
-	    docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
+	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${version}" -t f0rc3/barcodebuddy-docker:latest -f Dockerfile .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${version}" -t f0rc3/barcodebuddy-docker:arm64v8-latest -f Dockerfile.aarch64 .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${version}" -t f0rc3/barcodebuddy-docker:arm32v7-latest -f Dockerfile.armhf .
