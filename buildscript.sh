@@ -22,8 +22,8 @@ clear
 case $CHOICE in
         1)
             echo "Building dev images"
-	    cp /usr/bin/qemu-arm-static .
-	    cp /usr/bin/qemu-aarch64-static .
+#	    cp /usr/bin/qemu-arm-static .
+#	    cp /usr/bin/qemu-aarch64-static .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm64v8-latest-dev -f Dockerfile.dev.aarch64 .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm32v7-latest-dev -f Dockerfile.dev.armhf .
@@ -31,15 +31,15 @@ case $CHOICE in
 	    docker push f0rc3/barcodebuddy-docker:latest-dev
 	    docker push f0rc3/barcodebuddy-docker:arm64v8-latest-dev
 	    docker push f0rc3/barcodebuddy-docker:arm32v7-latest-dev
-	    rm qemu-arm-static
-	    rm qemu-aarch64-static
+#	    rm qemu-arm-static
+#	    rm qemu-aarch64-static
             ;;
         2)
             echo "Building all images"
 	    echo "Please enter release version:"
 	    read version
-	    cp /usr/bin/qemu-arm-static .
-	    cp /usr/bin/qemu-aarch64-static .
+#	    cp /usr/bin/qemu-arm-static .
+#	    cp /usr/bin/qemu-aarch64-static .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${version}" -t f0rc3/barcodebuddy-docker:latest -f Dockerfile .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${version}" -t f0rc3/barcodebuddy-docker:arm64v8-latest -f Dockerfile.aarch64 .
@@ -53,7 +53,7 @@ case $CHOICE in
 	    docker push f0rc3/barcodebuddy-docker:arm32v7-latest
 	    docker push f0rc3/barcodebuddy-docker:arm64v8-latest-dev
 	    docker push f0rc3/barcodebuddy-docker:arm32v7-latest-dev
-	    rm qemu-arm-static
-	    rm qemu-aarch64-static
+#	    rm qemu-arm-static
+#	    rm qemu-aarch64-static
             ;;
 esac
