@@ -1,5 +1,5 @@
 #!/bin/bash
-
+git pull
 HEIGHT=15
 WIDTH=40
 CHOICE_HEIGHT=4
