@@ -14,6 +14,18 @@ server {
         try_files $uri $uri/ =404;
   }
 
+ location /api/ {
+        try_files $uri /api/index.php$is_args$query_string;
+ }
+
+ location ~ /example/ {
+       deny all;
+ }
+ 
+location ~ /data/ {
+       deny all;
+ }
+
   location ~ \.php$ {
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
     fastcgi_read_timeout 80; 
