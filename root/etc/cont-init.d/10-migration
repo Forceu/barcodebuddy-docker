@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+mkdir /config/migrations 2> /dev/null
+
+if [ ! -f /config/migrations/v1_complete ]; then
+    rm /config/nginx/site-confs/default
+    touch /config/migrations/v1_complete
+fi
