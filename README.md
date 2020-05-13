@@ -76,6 +76,12 @@ In the current version, the websockets are only used for internal communication.
 
 The docker images build are based on [Alpine](https://hub.docker.com/_/alpine/), with an extremely low footprint (about 70MB in total).
 
+
+## Contributors
+<a href="https://github.com/forceu/barcodebuddy-docker/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=forceu/barcodebuddy-docker" />
+</a>
+
 ## License
 The MIT License (MIT)
 
