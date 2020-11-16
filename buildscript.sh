@@ -30,6 +30,7 @@ case $CHOICE in
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm32v7-latest-dev -f Dockerfile.dev.armhf .
             echo "Pushing dev images"
 	    docker push f0rc3/barcodebuddy-docker:latest-dev
+	    docker push f0rc3/barcodebuddy-docker:latest-testing
 	    docker push f0rc3/barcodebuddy-docker:arm64v8-latest-dev
 	    docker push f0rc3/barcodebuddy-docker:arm32v7-latest-dev
 #	    rm qemu-arm-static
