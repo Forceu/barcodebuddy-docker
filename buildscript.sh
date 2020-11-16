@@ -24,6 +24,7 @@ case $CHOICE in
             echo "Building dev images"
 #	    cp /usr/bin/qemu-arm-static .
 #	    cp /usr/bin/qemu-aarch64-static .
+	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-testing -f Dockerfile.testing .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:latest-dev -f Dockerfile.dev .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm64v8-latest-dev -f Dockerfile.dev.aarch64 .
 	    docker build --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t f0rc3/barcodebuddy-docker:arm32v7-latest-dev -f Dockerfile.dev.armhf .
