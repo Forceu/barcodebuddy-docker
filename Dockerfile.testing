@@ -4,6 +4,11 @@ FROM lsiobase/nginx:3.11
 
 # set version label
 ARG BUILD_DATE
+
+ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy.git
+ARG GIT_BRANCH=testing
+
+
 LABEL build_version="BarcodeBuddy TestingBuild Build-date: ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
@@ -26,7 +31,7 @@ RUN \
         sudo && \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy/ && \
- git clone --single-branch --branch testing https://github.com/Forceu/barcodebuddy.git /app/bbuddy/ &&  \
+ git clone --single-branch --branch $GIT_BRANCH $GIT_SOURCE /app/bbuddy/ &&  \
  rm -r /app/bbuddy/.git/ && \
  sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
