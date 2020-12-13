@@ -1,11 +1,7 @@
 name: Docker Publish arm64
 
 on:
-  push:
-    branches: master
-
-
-  pull_request:
+  repository_dispatch:
 
 env:
   DOCKER_FILE: Dockerfile.armhf
