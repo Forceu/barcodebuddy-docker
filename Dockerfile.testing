@@ -5,8 +5,8 @@ FROM lsiobase/nginx:3.11
 # set version label
 ARG BUILD_DATE
 
-ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy.git
-ARG GIT_BRANCH=testing
+ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy
+ARG GIT_BRANCH=grocy-prerelease
 
 
 LABEL build_version="BarcodeBuddy TestingBuild Build-date: ${BUILD_DATE}"
@@ -28,11 +28,11 @@ RUN \
         php7-sqlite3 \
         php7-sockets \
         screen \
+        git \
         sudo && \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy/ && \
  git clone --single-branch --branch $GIT_BRANCH $GIT_SOURCE /app/bbuddy/ &&  \
- rm -r /app/bbuddy/.git/ && \
  sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
