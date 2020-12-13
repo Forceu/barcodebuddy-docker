@@ -1,7 +1,7 @@
 name: Docker Publish arm64
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
 
 env:
   DOCKER_FILE: Dockerfile.armhf
