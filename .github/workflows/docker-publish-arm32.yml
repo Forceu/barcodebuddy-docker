@@ -5,7 +5,7 @@ on:
 
 
 env:
-  DOCKER_FILE: Dockerfile.armhf
+  DOCKER_FILE: Dockerfile.dev.armhf
   ARCH: arm32v7
 
 jobs:

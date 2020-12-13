@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_FILE: Dockerfile.armhf
-  ARCH: arm32v7
+  DOCKER_FILE: Dockerfile.dev.aarch64
+  ARCH: arm64v8
 
 jobs:
   build:

@@ -5,7 +5,7 @@ on:
 
 env:
   IMAGE_NAME: barcodebuddy-docker
-  DOCKER_FILE: Dockerfile
+  DOCKER_FILE: Dockerfile.dev
 
 jobs:
   build:
