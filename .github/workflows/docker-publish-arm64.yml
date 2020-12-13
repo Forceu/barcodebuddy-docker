@@ -1,0 +1,31 @@
+name: Docker Publish arm64
+
+on:
+  push:
+    branches: master
+
+
+  pull_request:
+
+env:
+  DOCKER_FILE: Dockerfile.armhf
+  ARCH: arm32v7
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: install buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      - name: login to docker hub
+        run: echo "${{ secrets.DOCKER_PW }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+      - name: build the image
+        run: |
+          docker buildx build --file $DOCKER_FILE \
+            --tag f0rc3/barcodebuddy-docker:arm64v8-latest-dev \
+            --platform linux/arm/v7 --push .

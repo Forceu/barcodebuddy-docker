@@ -1,5 +1,6 @@
 #!/bin/bash
 git pull
+sed -i 's/#COPY qemu-/COPY qemu-/g' Dockerfile*
 HEIGHT=15
 WIDTH=40
 CHOICE_HEIGHT=4

@@ -7,8 +7,8 @@ ARG BUILD_DATE
 LABEL build_version="BarcodeBuddy DevBuild Build-date: ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
-#Remove the line below, if not compiling on an x64/x86 machine
-COPY qemu-arm-static /usr/bin/qemu-arm-static
+#Uncomment the line below, if compiling on an x64/x86 machine
+#COPY qemu-arm-static /usr/bin/qemu-arm-static
 
 RUN \
  echo "**** install build packages ****" && \
@@ -39,8 +39,7 @@ sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/docker/parseEnv.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \
  echo "**** Cleanup ****" && \
  apk del --purge build-dependencies && \
- rm -rf /root/.cache /tmp/* \
-	/usr/bin/qemu-arm-static
+ rm -rf /root/.cache /tmp/* 
 
 #Bug in sudo requires disable_coredump
 #Max children need to be a higher value, otherwise websockets / SSE might not work properly

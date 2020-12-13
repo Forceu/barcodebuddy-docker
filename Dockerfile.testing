@@ -6,7 +6,7 @@ FROM lsiobase/nginx:3.11
 ARG BUILD_DATE
 
 ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy
-ARG GIT_BRANCH=grocy-prerelease
+ARG GIT_BRANCH=master
 
 
 LABEL build_version="BarcodeBuddy TestingBuild Build-date: ${BUILD_DATE}"

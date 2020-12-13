@@ -10,8 +10,8 @@ LABEL build_version="BarcodeBuddy ${VERSION} Build ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
 
-#Remove the line below, if not compiling on an x64/x86 machine
-COPY qemu-arm-static /usr/bin/qemu-arm-static
+#Uncomment the line below, if compiling on an x64/x86 machine
+#COPY qemu-arm-static /usr/bin/qemu-arm-static
 
 RUN \
  echo "**** Installing runtime packages ****" && \
@@ -54,8 +54,7 @@ RUN \
  echo "**** Cleanup ****" && \
  rm -rf \
 	/root/.cache \
-	/tmp/* \
-	/usr/bin/qemu-arm-static
+	/tmp/* 
 
 # copy local files
 COPY root/ /

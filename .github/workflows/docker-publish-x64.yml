@@ -1,0 +1,26 @@
+name: Docker Publish x64
+
+on:
+  repository_dispatch:
+
+env:
+  IMAGE_NAME: barcodebuddy-docker
+  DOCKER_FILE: Dockerfile
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file $DOCKER_FILE --tag $IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Push image
+        run: |
+          docker tag $IMAGE_NAME f0rc3/barcodebuddy-docker:latest-dev
+          docker push barcodebuddy-docker:latest-dev
