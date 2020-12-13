@@ -18,4 +18,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Build image
-        run: docker build --push --file $DOCKER_FILE --tag f0rc3/barcodebuddy-docker:latest-dev .
+        run: docker build --file $DOCKER_FILE --tag f0rc3/barcodebuddy-docker:latest-dev .
+
+      - name: Push image
+        run: docker push f0rc3/barcodebuddy-docker:latest-dev
