@@ -22,4 +22,4 @@ jobs:
         run: docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${VERSION}" --file $DOCKER_FILE --tag f0rc3/barcodebuddy-docker:latest .
 
       - name: Push image
-        run: docker push f0rc3/barcodebuddy-docker:latest-dev
+        run: docker push f0rc3/barcodebuddy-docker:latest
