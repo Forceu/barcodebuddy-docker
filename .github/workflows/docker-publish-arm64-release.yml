@@ -1,10 +1,10 @@
-name: Docker Publish arm64
+name: Docker Publish arm64 Release
 
 on:
   workflow_dispatch:
 
 env:
-  DOCKER_FILE: Dockerfile.dev.aarch64
+  DOCKER_FILE: Dockerfile.aarch64
   ARCH: arm64v8
   VERSION: v1.6.0.0
 
@@ -26,5 +26,5 @@ jobs:
           docker buildx build --file $DOCKER_FILE \
             --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
             --build-arg VERSION="${VERSION}" \
-            --tag f0rc3/barcodebuddy-docker:arm64v8-latest-dev \
+            --tag f0rc3/barcodebuddy-docker:arm64v8-latest \
             --platform linux/arm/v7 --push .
