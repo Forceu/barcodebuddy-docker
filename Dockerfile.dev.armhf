@@ -4,7 +4,8 @@ FROM lsiobase/nginx:arm32v7-3.11
 
 # set version label
 ARG BUILD_DATE
-LABEL build_version="BarcodeBuddy DevBuild Build-date: ${BUILD_DATE}"
+ARG VERSION
+LABEL build_version="BarcodeBuddy DevBuild Build-date: ${BUILD_DATE} Based on: ${VERSION}"
 LABEL maintainer="Marc Ole Bulling"
 
 #Uncomment the line below, if compiling on an x64/x86 machine
