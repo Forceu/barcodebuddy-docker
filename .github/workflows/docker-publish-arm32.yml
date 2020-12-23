@@ -2,12 +2,15 @@ name: Docker Publish arm32
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number of new release'     
+        required: true
 
 
 env:
   DOCKER_FILE: Dockerfile.dev.armhf
   ARCH: arm32v7
-  VERSION: v1.6.0.0
 
 jobs:
   build:
@@ -26,6 +29,6 @@ jobs:
         run: |
           docker buildx build --file $DOCKER_FILE \
             --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-            --build-arg VERSION="${VERSION}" \
+            --build-arg VERSION="${{ github.event.inputs.version }}" \
             --tag f0rc3/barcodebuddy-docker:arm32v7-latest-dev \
             --platform linux/arm/v6 --push .
