@@ -28,9 +28,10 @@ The architectures supported by this image are:
 
 | Architecture | Tag |
 | :----: | --- |
-| x86-64 | latest |
+| amd64 | latest |
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
+| x86 | i386-latest |
 
 #### Developer image
 
@@ -46,9 +47,10 @@ The architectures supported by this image are:
 
 | Architecture | Tag |
 | :----: | --- |
-| x86-64 | latest-dev |
+| amd64 | latest-dev |
 | arm64 | arm64v8-latest-dev |
 | armhf | arm32v7-latest-dev |
+| x86 | i386-latest-dev |
 
 ### To build from scratch
 

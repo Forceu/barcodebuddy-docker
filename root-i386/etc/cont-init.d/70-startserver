@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+sudo -u abc /usr/bin/nohup /usr/bin/php /app/bbuddy/wsserver.php &
+/usr/bin/nohup /bin/bash /app/bbuddy/example/grabInput.sh &

@@ -1,0 +1,36 @@
+server {
+  listen 80 default_server;
+  listen 443 ssl;
+  root /app/bbuddy/;
+  index index.php index.html index.htm;
+  server_name _;
+  ssl_certificate /config/keys/cert.crt;
+  ssl_certificate_key /config/keys/cert.key;
+
+  client_max_body_size 100M;
+  client_body_buffer_size 128k;
+
+  location / {
+        try_files $uri $uri/ =404;
+  }
+
+ location /api/ {
+        try_files $uri /api/index.php$is_args$query_string;
+ }
+
+ location ~ /example/ {
+       deny all;
+ }
+ 
+location ~ /data/ {
+       deny all;
+ }
+
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_read_timeout 80; 
+    fastcgi_pass 127.0.0.1:9000;
+    fastcgi_pass_header "X-Accel-Buffering";
+    include /etc/nginx/fastcgi_params;
+  }
+}
