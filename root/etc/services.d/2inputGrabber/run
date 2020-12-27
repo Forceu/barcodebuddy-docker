@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+exec /bin/bash /app/bbuddy/example/grabInput.sh
