@@ -23,6 +23,8 @@ RUN \
         php7-pdo_sqlite \
         php7-sqlite3 \
         php7-sockets \
+        php7-redis \
+        redis \
         screen \
         sudo
 RUN \

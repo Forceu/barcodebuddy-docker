@@ -140,6 +140,8 @@ RUN \
         php7-sqlite3 \
         php7-sockets \
         screen \
+        php7-redis \
+        redis \
         sudo
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
