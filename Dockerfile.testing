@@ -5,8 +5,8 @@ FROM lsiobase/nginx:3.11
 # set version label
 ARG BUILD_DATE
 
-ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy
-ARG GIT_BRANCH=master
+ARG GIT_SOURCE=https://github.com/Forceu/barcodebuddy.git
+ARG GIT_BRANCH=testSocket
 
 
 LABEL build_version="BarcodeBuddy TestingBuild Build-date: ${BUILD_DATE}"
