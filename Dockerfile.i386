@@ -1,4 +1,4 @@
-FROM alpine:3.10 as rootfs-stage
+FROM alpine:3.15 as rootfs-stage
 
 # environment
 ENV REL=v3.12
@@ -97,18 +97,18 @@ RUN \
 	nano \
 	nginx \
 	openssl \
-	php7 \
-	php7-fileinfo \
-	php7-fpm \
-	php7-json \
-	php7-mbstring \
-        php7-gettext \
-	php7-openssl \
-	php7-session \
-	php7-simplexml \
-	php7-xml \
-	php7-xmlwriter \
-	php7-zlib && \
+	php8 \
+	php8-fileinfo \
+	php8-fpm \
+	php8-json \
+	php8-mbstring \
+        php8-gettext \
+	php8-openssl \
+	php8-session \
+	php8-simplexml \
+	php8-xml \
+	php8-xmlwriter \
+	php8-zlib && \
  echo "**** configure nginx ****" && \
  echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
 	/etc/nginx/fastcgi_params && \
@@ -133,17 +133,17 @@ RUN \
  apk add --no-cache \
         curl \
         evtest \
-        php7 \
-        php7-curl \
-        php7-openssl \
-        php7-gettext \
-        php7-mbstring \
-        php7-pdo \
-        php7-pdo_sqlite \
-        php7-sqlite3 \
-        php7-sockets \
+        php8 \
+        php8-curl \
+        php8-openssl \
+        php8-gettext \
+        php8-mbstring \
+        php8-pdo \
+        php8-pdo_sqlite \
+        php8-sqlite3 \
+        php8-sockets \
         screen \
-        php7-redis \
+        php8-redis \
         redis \
         sudo
 RUN \
@@ -162,7 +162,7 @@ RUN \
    sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
- sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php7/php-fpm.d/www.conf && \
+ sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php8/php-fpm.d/www.conf && \
 sed -i 's/WWW_USER=.*/WWW_USER="abc"/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/docker/parseEnv.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \

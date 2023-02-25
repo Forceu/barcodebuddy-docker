@@ -1,4 +1,4 @@
-FROM lsiobase/nginx:3.11
+FROM lsiobase/nginx:3.15-php8
 
 #Build example: docker build --no-cache --pull --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t forceu/barcodebuddy-docker -f Dockerfile.dev .
 
@@ -16,16 +16,16 @@ RUN \
  apk add --no-cache \
         curl \
         evtest \
-        php7 \
-        php7-curl \
-        php7-gettext \
-        php7-mbstring \
-        php7-openssl \
-        php7-pdo \
-        php7-pdo_sqlite \
-        php7-sqlite3 \
-        php7-sockets \
-        php7-redis \
+        php8 \
+        php8-curl \
+        php8-gettext \
+        php8-mbstring \
+        php8-openssl \
+        php8-pdo \
+        php8-pdo_sqlite \
+        php8-sqlite3 \
+        php8-sockets \
+        php8-redis \
         redis \
         screen \
         sudo && \
@@ -36,7 +36,7 @@ RUN \
  sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
- sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php7/php-fpm.d/www.conf && \
+ sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php8/php-fpm.d/www.conf && \
 sed -i 's/WWW_USER=.*/WWW_USER="abc"/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/docker/parseEnv.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \
