@@ -66,6 +66,7 @@ RUN \
 	coreutils \
 	procps \
 	shadow \
+        tar \
 	tzdata && \
  echo "**** create abc user and make our folders ****" && \
  groupmod -g 1000 users && \

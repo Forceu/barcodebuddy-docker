@@ -28,7 +28,8 @@ RUN \
         php8-redis \
         redis \
         screen \
-        sudo
+        sudo \
+        tar
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy && \

@@ -31,7 +31,8 @@ RUN \
         redis \
         screen \
         git \
-        sudo && \
+        sudo \
+        tar && \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy/ && \
  git clone --single-branch --branch $GIT_BRANCH $GIT_SOURCE /app/bbuddy/ &&  \

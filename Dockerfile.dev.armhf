@@ -30,7 +30,8 @@ RUN \
         php8-redis \
         redis \
         screen \
-        sudo && \
+        sudo \
+        tar && \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy/ && \
  git clone https://github.com/Forceu/barcodebuddy.git /app/bbuddy/ &&  \
