@@ -20,8 +20,8 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
-      - name: Build image
-        run: docker buildx build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}" --file Dockerfile--tag f0rc3/barcodebuddy-docker:latest  --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 .
+      - name: Build and push image
+        run: docker buildx build --push --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}"  --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 --file Dockerfile--tag f0rc3/barcodebuddy-docker:latest .
 
       - name: Push image
-        run: docker push f0rc3/barcodebuddy-docker:latest && docker tag f0rc3/barcodebuddy-docker:latest f0rc3/barcodebuddy-docker:${{ github.event.inputs.version }} && docker push f0rc3/barcodebuddy-docker:${{ github.event.inputs.version }}
+        run: docker buildx build --push --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}"  --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 --file Dockerfile--tag f0rc3/barcodebuddy-docker:${{ github.event.inputs.version }} .
