@@ -1,4 +1,4 @@
-name: Docker Publish x64
+name: Docker Publish Multiarch Dev
 
 on:
   workflow_dispatch:
@@ -14,6 +14,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: install buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
 
       - name: Log into registry
         run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
