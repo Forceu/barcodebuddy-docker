@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-exec sudo -u abc /usr/bin/php /app/bbuddy/wsserver.php

@@ -31,7 +31,6 @@ RUN \
 	coreutils \
 	curl \
 	evtest \
-	git \
 	libressl3.4-libssl \
 	nano \
 	nginx \
@@ -81,8 +80,16 @@ LABEL maintainer="Marc Ole Bulling"
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
  mkdir -p /app/bbuddy && \
-  git clone https://github.com/Forceu/barcodebuddy.git /app/bbuddy/ &&  \
- rm -r /app/bbuddy/.git/ && \
+ if [ -z ${BBUDDY_RELEASE+x} ]; then \
+	BBUDDY_RELEASE=$(curl -sX GET "https://api.github.com/repos/Forceu/barcodebuddy/releases/latest" \
+	| awk '/tag_name/{print $4; exit}' FS='[""]'); \
+ fi && \
+ curl -o \
+	/tmp/bbuddy.tar.gz -L \
+	"https://github.com/Forceu/barcodebuddy/archive/${BBUDDY_RELEASE}.tar.gz" && \
+ tar xf \
+	/tmp/bbuddy.tar.gz -C \
+	/app/bbuddy/ --strip-components=1 && \
    sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
