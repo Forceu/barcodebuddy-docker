@@ -1,9 +1,11 @@
 # BarcodeBuddy on Docker
 
-BarcodeBuddy- now containerized! This is the docker repo of [BarcodeBuddy](https://github.com/Forceu/barcodebuddy).
 
 [![Documentation Status](https://readthedocs.org/projects/barcodebuddy-documentation/badge/?version=latest)](https://barcodebuddy-documentation.readthedocs.io/en/latest/?badge=latest)
 [![Docker Pulls](https://img.shields.io/docker/pulls/f0rc3/barcodebuddy-docker.svg)](https://hub.docker.com/r/f0rc3/barcodebuddy-docker/)
+
+
+$\textcolor{red}{\textsf{Attention}}$ **Please note that the image name has changed from barcodebuddy-docker to barcodebuddy!** This image is now a multi-arch image, therefore you can use the tag latest or latest-dev for all architectures.
 
 ### Install Docker
 
