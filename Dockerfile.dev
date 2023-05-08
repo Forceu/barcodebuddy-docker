@@ -1,4 +1,5 @@
 FROM golang:1.20 AS build_base
+LABEL stage=builder
 
 RUN mkdir /compile
   

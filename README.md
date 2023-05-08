@@ -14,9 +14,11 @@ Follow [these instructions](https://docs.docker.com/engine/installation/) to get
 ### To pull the latest images to your machine:
 
 ```
-docker pull f0rc3/barcodebuddy-docker:latest
-docker run -d -v bbconfig:/config -p 80:80 -p 443:443 f0rc3/barcodebuddy-docker:latest
+docker pull f0rc3/barcodebuddy:latest
+docker run -d -v bbconfig:/config -p 8080:80 -p 4433:443 f0rc3/barcodebuddy:latest
 ```
+
+Replace the ports 8080 and 4433 with a port of your choice, which will be exposed on your local machine.
 
 ## Documentation
 
@@ -29,16 +31,16 @@ The architectures supported by this image are:
 | Architecture | Tag |
 | :----: | --- |
 | amd64 | latest |
-| arm64 | arm64v8-latest |
-| armhf | arm32v7-latest |
-| x86 | i386-latest |
+| arm64 | latest |
+| armhf | latest |
+| x86 | latest |
 
 #### Developer image
 
 If you would like to use the unstable channel, which includes all commits and might be more up to date than the release, use the following command:
 
 ```
-docker pull f0rc3/barcodebuddy-docker:latest-dev
+docker pull f0rc3/barcodebuddy:latest-dev
 ```
 
 
@@ -48,19 +50,19 @@ The architectures supported by this image are:
 | Architecture | Tag |
 | :----: | --- |
 | amd64 | latest-dev |
-| arm64 | arm64v8-latest-dev |
-| armhf | arm32v7-latest-dev |
-| x86 | i386-latest-dev |
+| arm64 | latest-dev  |
+| armhf | latest-dev  |
+| x86 | latest-dev  |
 
 ### To build from scratch
 
 #### Latest release
 ```
-docker build --no-cache --pull -t forceu/barcodebuddy-docker .
+docker build --no-cache --pull -t forceu/barcodebuddy .
 ```
 #### Latest commit (unstable)
 ```
-docker build --no-cache --pull -t forceu/barcodebuddy-docker-dev -f Dockerfile.dev .
+docker build --no-cache --pull -t forceu/barcodebuddy-dev -f Dockerfile.dev .
 ```
 
 ## Additional Information

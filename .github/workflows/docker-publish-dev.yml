@@ -22,4 +22,4 @@ jobs:
         run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
 
       - name: Build and push image
-        run: docker buildx build --push --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}" --file Dockerfile.dev --tag f0rc3/barcodebuddy-docker:latest-dev --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64  .
+        run: docker buildx build --push --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}" -f Dockerfile.dev -t f0rc3/barcodebuddy:latest-dev --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64  .
