@@ -67,7 +67,8 @@ RUN \
  chown redis:redis /etc/redis.conf && \
  useradd -d /config -s /bin/false barcodebuddy && \
  chmod 755 /etc && \
- chown barcodebuddy:barcodebuddy -R /var/log/php8
+ chown barcodebuddy:barcodebuddy -R /var/log/php8 && \
+ ln -s /usr/bin/php8 /usr/bin/php
 
 
 # set version label
