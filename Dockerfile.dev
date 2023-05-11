@@ -68,7 +68,8 @@ RUN \
  useradd -d /config -s /bin/false barcodebuddy && \
  chmod 755 /etc && \
  chown barcodebuddy:barcodebuddy -R /var/log/php8 && \
- ln -s /usr/bin/php8 /usr/bin/php
+ ln -s /usr/bin/php8 /usr/bin/php && \
+ ln -s /config /data
 
 
 # set version label
