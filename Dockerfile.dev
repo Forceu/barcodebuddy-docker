@@ -8,7 +8,7 @@ COPY supervisor/ /compile
 RUN cd /compile && CGO_ENABLED=0 go build -o /compile/supervisor .
 
 
-FROM alpine:3.15
+FROM alpine:3.24
 
 RUN apk add ca-certificates curl && mkdir /app && touch /app/.isdocker
 
@@ -33,28 +33,27 @@ RUN \
 	curl \
 	evtest \
 	git \
-	libressl3.4-libssl \
 	nano \
 	nginx \
 	openssl \
-	php8 \
-	php8-curl \
-	php8-fileinfo \
-	php8-fpm \
-	php8-gettext \
-	php8-json \
-	php8-mbstring \
-	php8-openssl \
-	php8-pdo \
-	php8-pdo_sqlite \
-	php8-redis \
-	php8-session \
-	php8-simplexml \
-	php8-sockets \
-	php8-sqlite3 \
-	php8-xml \
-	php8-xmlwriter \
-	php8-zlib \
+	php83 \
+	php83-curl \
+	php83-fileinfo \
+	php83-fpm \
+	php83-gettext \
+	php83-json \
+	php83-mbstring \
+	php83-openssl \
+	php83-pdo \
+	php83-pdo_sqlite \
+	php83-pecl-redis \
+	php83-session \
+	php83-simplexml \
+	php83-sockets \
+	php83-sqlite3 \
+	php83-xml \
+	php83-xmlwriter \
+	php83-zlib \
 	procps \
 	redis \
 	screen \
@@ -67,8 +66,8 @@ RUN \
  chown redis:redis /etc/redis.conf && \
  useradd -d /config -s /bin/false barcodebuddy && \
  chmod 755 /etc && \
- chown barcodebuddy:barcodebuddy -R /var/log/php8 && \
- ln -s /usr/bin/php8 /usr/bin/php && \
+ chown barcodebuddy:barcodebuddy -R /var/log/php83 && \
+ ln -s /usr/bin/php83 /usr/bin/php && \
  ln -s /config /data
 
 
@@ -89,7 +88,7 @@ RUN \
    sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
- sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php8/php-fpm.d/www.conf && \
+ sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php83/php-fpm.d/www.conf && \
 sed -i 's/WWW_USER=.*/WWW_USER="barcodebuddy"/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/const DEFAULT_USE_REDIS =.*/const DEFAULT_USE_REDIS = "1";/g' /app/bbuddy/incl/db.inc.php && \

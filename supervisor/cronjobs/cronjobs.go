@@ -39,7 +39,7 @@ func (j *cronjob) Stop() {
 
 func Start() {
 	bbCron := cronjob{
-		Executable:      "/usr/bin/php8",
+		Executable:      "/usr/bin/php83",
 		Parameters:      []string{"/app/bbuddy/cron.php"},
 		User:            "barcodebuddy",
 		IntervalSeconds: 120,

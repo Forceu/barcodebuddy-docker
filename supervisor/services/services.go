@@ -56,8 +56,8 @@ func Start() {
 		MaxRestarts: 0,
 	})
 	services = append(services, service{
-		Name:        "PHP-fpm8",
-		Executable:  "/usr/sbin/php-fpm8",
+		Name:        "PHP-fpm83",
+		Executable:  "/usr/sbin/php-fpm83",
 		Parameters:  []string{"-F"},
 		User:        "barcodebuddy",
 		ShowOutput:  false,
@@ -74,7 +74,7 @@ func Start() {
 	})
 	services = append(services, service{
 		Name:        "Websocket Server",
-		Executable:  "/usr/bin/php8",
+		Executable:  "/usr/bin/php83",
 		Parameters:  []string{"/app/bbuddy/wsserver.php"},
 		User:        "barcodebuddy",
 		ShowOutput:  false,
