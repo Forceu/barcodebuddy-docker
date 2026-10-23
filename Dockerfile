@@ -1,4 +1,4 @@
-FROM golang:1.27 AS build_base
+FROM golang:1.27-alpine AS build_base
 LABEL stage=builder
 
 RUN mkdir /compile
