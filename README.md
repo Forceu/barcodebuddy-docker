@@ -62,9 +62,14 @@ The architectures supported by this image are:
 ```
 docker build --no-cache --pull -t forceu/barcodebuddy .
 ```
+#### Specific tag, branch or commit
+Use the build argument `BBUDDY_REF`. If it is not set, the latest release tag is used.
+```
+docker build --no-cache --pull --build-arg BBUDDY_REF=v1.8.1.9 -t forceu/barcodebuddy .
+```
 #### Latest commit (unstable)
 ```
-docker build --no-cache --pull -t forceu/barcodebuddy-dev -f Dockerfile.dev .
+docker build --no-cache --pull --build-arg BBUDDY_REF=HEAD -t forceu/barcodebuddy-dev .
 ```
 
 ## Additional Information

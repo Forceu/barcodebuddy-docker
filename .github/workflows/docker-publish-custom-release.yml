@@ -1,0 +1,28 @@
+name: Docker Publish Custom Multiarch Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number of release'     
+        required: true
+      ref:
+        description: 'Tag or commit hash of Forceu/barcodebuddy to build (empty = latest release)'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKER_PW }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Build and push image
+        run: docker buildx build --push --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION="${{ github.event.inputs.version }}" --build-arg BBUDDY_REF="${{ github.event.inputs.ref }}" --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 --file Dockerfile --tag f0rc3/barcodebuddy:${{ github.event.inputs.version }} .

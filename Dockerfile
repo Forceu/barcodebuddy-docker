@@ -74,7 +74,9 @@ RUN \
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG BBUDDY_RELEASE
+# Tag, branch or commit hash of Forceu/barcodebuddy to build.
+# If empty, the latest release tag is used.
+ARG BBUDDY_REF=""
 LABEL build_version="BarcodeBuddy ${VERSION} Build ${BUILD_DATE}"
 LABEL maintainer="Marc Ole Bulling"
 
@@ -82,17 +84,24 @@ LABEL maintainer="Marc Ole Bulling"
 
 RUN \
  echo "**** Installing BarcodeBuddy ****" && \
+ apk add --no-cache --virtual .build-deps git && \
  mkdir -p /app/bbuddy && \
- if [ -z ${BBUDDY_RELEASE+x} ]; then \
-	BBUDDY_RELEASE=$(curl -sX GET "https://api.github.com/repos/Forceu/barcodebuddy/releases/latest" \
-	| awk '/tag_name/{print $4; exit}' FS='[""]'); \
+ BBUDDY_REPO="https://github.com/Forceu/barcodebuddy.git" && \
+ if [ -z "${BBUDDY_REF}" ]; then \
+	BBUDDY_REF=$(git ls-remote --tags --refs --sort=-v:refname "${BBUDDY_REPO}" \
+	| head -n 1 | sed 's|.*refs/tags/||'); \
  fi && \
- curl -o \
-	/tmp/bbuddy.tar.gz -L \
-	"https://github.com/Forceu/barcodebuddy/archive/${BBUDDY_RELEASE}.tar.gz" && \
- tar xf \
-	/tmp/bbuddy.tar.gz -C \
-	/app/bbuddy/ --strip-components=1 && \
+ if [ -z "${BBUDDY_REF}" ]; then \
+	echo "Could not determine latest release" >&2; exit 1; \
+ fi && \
+ echo "Using BarcodeBuddy ref: ${BBUDDY_REF}" && \
+ cd /app/bbuddy && \
+ git init -q . && \
+ git remote add origin "${BBUDDY_REPO}" && \
+ git fetch -q --depth 1 origin "${BBUDDY_REF}" && \
+ git checkout -q FETCH_HEAD && \
+ rm -rf /app/bbuddy/.git && \
+ apk del .build-deps && \
    sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
