@@ -23,10 +23,12 @@ func initPaths() {
 }
 
 func setPermissions() {
-	err := osutils.ChownFolderRecursive("/app", "barcodebuddy")
-	check(err)
-	err = osutils.ChownFolderRecursive("/config", "barcodebuddy")
-	check(err)
+	if err := osutils.ChownFolderRecursive("/app", "barcodebuddy"); err != nil {
+		log.Printf("Warning: chown /app failed: %v (continuing)", err)
+	}
+	if err := osutils.ChownFolderRecursive("/config", "barcodebuddy"); err != nil {
+		log.Printf("Warning: chown /config failed: %v (continuing)", err)
+	}
 	fmt.Println("File permissions set")
 }
 
