@@ -75,21 +75,20 @@ func ChownFolderRecursive(path, username string) error {
 	if err != nil {
 		return err
 	}
-	err = filepath.Walk(path, func(filePath string, info os.FileInfo, err error) error {
+	return filepath.WalkDir(path, func(filePath string, d os.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-
-		if err = os.Chown(filePath, int(uid), int(gid)); err != nil {
+		info, err := d.Info()
+		if err != nil {
 			return err
 		}
-
-		return nil
+		if st, ok := info.Sys().(*syscall.Stat_t); ok &&
+			int64(st.Uid) == uid && int64(st.Gid) == gid {
+			return nil
+		}
+		return os.Lchown(filePath, int(uid), int(gid))
 	})
-	if err != nil {
-		return err
-	}
-	return nil
 }
 
 func getUserIds(username string) (int64, int64, error) {

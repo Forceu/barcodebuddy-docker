@@ -1,4 +1,4 @@
-FROM golang:1.20 AS build_base
+FROM golang:1.27 AS build_base
 LABEL stage=builder
 
 RUN mkdir /compile
@@ -8,7 +8,7 @@ COPY supervisor/ /compile
 RUN cd /compile && CGO_ENABLED=0 go build -o /compile/supervisor .
 
 
-FROM alpine:3.15
+FROM alpine:3.24
 
 RUN apk add ca-certificates curl && mkdir /app && touch /app/.isdocker
 
@@ -32,28 +32,27 @@ RUN \
 	coreutils \
 	curl \
 	evtest \
-	libressl3.4-libssl \
 	nano \
 	nginx \
 	openssl \
-	php8 \
-	php8-curl \
-	php8-fileinfo \
-	php8-fpm \
-	php8-gettext \
-	php8-json \
-	php8-mbstring \
-	php8-openssl \
-	php8-pdo \
-	php8-pdo_sqlite \
-	php8-redis \
-	php8-session \
-	php8-simplexml \
-	php8-sockets \
-	php8-sqlite3 \
-	php8-xml \
-	php8-xmlwriter \
-	php8-zlib \
+	php85 \
+	php85-curl \
+	php85-fileinfo \
+	php85-fpm \
+	php85-gettext \
+	php85-json \
+	php85-mbstring \
+	php85-openssl \
+	php85-pdo \
+	php85-pdo_sqlite \
+	php85-redis \
+	php85-session \
+	php85-simplexml \
+	php85-sockets \
+	php85-sqlite3 \
+	php85-xml \
+	php85-xmlwriter \
+	php85-zlib \
 	procps \
 	redis \
 	screen \
@@ -66,8 +65,9 @@ RUN \
  chown redis:redis /etc/redis.conf && \
  useradd -d /config -s /bin/false barcodebuddy && \
  chmod 755 /etc && \
- chown barcodebuddy:barcodebuddy -R /var/log/php8 && \
- ln -s /usr/bin/php8 /usr/bin/php && \
+ chown barcodebuddy:barcodebuddy -R /var/log/php85 && \
+ chown barcodebuddy:barcodebuddy -R /app && \
+ ln -s /usr/bin/php85 /usr/bin/php8 && \
  ln -s /config /data
 
 
@@ -96,7 +96,7 @@ RUN \
    sed -i 's/[[:blank:]]*const[[:blank:]]*IS_DOCKER[[:blank:]]*=[[:blank:]]*false;/const IS_DOCKER = true;/g' /app/bbuddy/config-dist.php && \
  echo "Set disable_coredump false" > /etc/sudo.conf && \
 sed -i 's/SCRIPT_LOCATION=.*/SCRIPT_LOCATION="\/app\/bbuddy\/index.php"/g' /app/bbuddy/example/grabInput.sh && \
- sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php8/php-fpm.d/www.conf && \
+ sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php85/php-fpm.d/www.conf && \
 sed -i 's/WWW_USER=.*/WWW_USER="barcodebuddy"/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/IS_DOCKER=.*/IS_DOCKER=true/g' /app/bbuddy/example/grabInput.sh && \
 sed -i 's/const DEFAULT_USE_REDIS =.*/const DEFAULT_USE_REDIS = "1";/g' /app/bbuddy/incl/db.inc.php && \
